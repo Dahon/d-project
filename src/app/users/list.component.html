@@ -1,0 +1,41 @@
+﻿<script
+  src="../../../../../../Downloads/joopps-frontend/src/app/modules/videome/videome-mobile/pages/videome-main/videome-main.component.ts"></script>
+<h1>Users</h1>
+<!--<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>-->
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 30%">First Name</th>
+            <th style="width: 30%">Last Name</th>
+            <th style="width: 20%">Username</th>
+            <th style="width: 20%">Likes</th>
+<!--            <th style="width: 10%"></th>-->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.username}}</td>
+            <td><button style="font-size: 10px" type="button" class="btn btn-outline-danger" (click)="dislike(user.id)">
+              dislike
+            </button>
+              {{user.likes}}
+              <button style="font-size: 10px" (click)="like(user.id)" type="button" class="btn btn-outline-primary">
+              like
+            </button></td>
+<!--            <td style="white-space: nowrap">-->
+<!--                <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>-->
+<!--                <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting">-->
+<!--                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>-->
+<!--                    <span *ngIf="!user.isDeleting">Delete</span>-->
+<!--                </button>-->
+<!--            </td>-->
+        </tr>
+        <tr *ngIf="!users">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+:host ::ng-deep {
+    .about-me {
+        &__logo {
+            margin-bottom: 15px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 0;
+            img {
+                width: 105px;
+                height: 90px;
+            }
+            button {
+                margin-top: 10px;
+                width: 145px;
+                height: 36px;
+                background-color: #40A33F;
+                font-size: 14px;
+                color: #fff;
+            }
+        }
+        &__form {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        &__input {
+            padding: 10px 15px;
+            background-color: #343a3f;
+        }
+
+        &__button-block {
+            padding: 22px 15px;
+            button {
+                width: 100%;
+                background-color: #FF6161;
+                font-size: 16px;
+                color: #fff;
+                height: 55px;
+            }
+        }
+    }
+
+}
