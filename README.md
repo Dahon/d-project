@@ -1,11 +1,13 @@
 node js
 
-npm install -g @angular/cli
+git
 
-npm i
+npm install -g @angular/cli
 
 npm install --global http-server
 
 npm install -g json-server
+
+npm i
 
 npm run pwa
