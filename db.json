@@ -1,0 +1,61 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profiles": [
+    {
+      "firstName": "Darkhan",
+      "lastName": "Yertayev",
+      "linkedInLink": "asdasdasdsa",
+      "description": "asd",
+      "id": 2,
+      "startDate": "2022-03-15T21:00:00.000Z",
+      "employmentType": "Full time",
+      "travelRequirements": "25% Travel",
+      "educationLevel": "A2",
+      "workLocation": "Degree",
+      "specializations": [
+        ".net",
+        "php",
+        "js"
+      ],
+      "expected_salary": "22222",
+      "name": "",
+      "avatar": "/assets/images/avatar.png",
+      "poster": "/assets/images/video.jpg",
+      "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    },
+    {
+      "firstName": "Yertayev",
+      "lastName": "Zhanibek",
+      "linkedInLink": "https://ru.linkedin.com/",
+      "description": "some texyt",
+      "id": 1,
+      "startDate": "2022-01-19T21:00:00.000Z",
+      "employmentType": "Part time",
+      "educationLevel": "A2",
+      "workLocation": "Agree",
+      "specializations": [
+        "php",
+        "js",
+        "html"
+      ],
+      "expected_salary": "2000-5000$",
+      "name": "",
+      "avatar": "/assets/images/avatar.png",
+      "poster": "/assets/images/video.jpg",
+      "video": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    }
+  ]
+}

@@ -60,14 +60,14 @@
               </mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field class="about-me__input" appearance="outline">
-            <mat-label>Travel requirements</mat-label>
-            <mat-select formControlName="travelRequirements">
-              <mat-option *ngFor="let item of travelOptions" [value]="item.value">
-                {{item.label}}
-              </mat-option>
-            </mat-select>
-        </mat-form-field>
+<!--        <mat-form-field class="about-me__input" appearance="outline">-->
+<!--            <mat-label>Travel requirements</mat-label>-->
+<!--            <mat-select formControlName="travelRequirements">-->
+<!--              <mat-option *ngFor="let item of travelOptions" [value]="item.value">-->
+<!--                {{item.label}}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--        </mat-form-field>-->
         <mat-form-field class="about-me__input" appearance="outline">
             <mat-label>Education level</mat-label>
             <mat-select formControlName="educationLevel">
@@ -86,19 +86,15 @@
         </mat-form-field>
       <mat-form-field class="about-me__input" appearance="outline">
         <mat-label>specializations</mat-label>
-        <mat-select formControlName="specializations">
-          <mat-option *ngFor="let item of workLocationOptions" [value]="item.value">
+        <mat-select formControlName="specializations" multiple>
+          <mat-option *ngFor="let item of specializationOptions" [value]="item.value">
             {{item.label}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="about-me__input" appearance="outline">
         <mat-label>expected salary</mat-label>
-        <mat-select formControlName="expected_salary">
-          <mat-option *ngFor="let item of workLocationOptions" [value]="item.value">
-            {{item.label}}
-          </mat-option>
-        </mat-select>
+          <input type="text" matInput formControlName="expected_salary" placeholder="$200k">
       </mat-form-field>
         <div class="about-me__button-block">
             <button (click)="onSubmit()" mat-raised-button>Save</button>

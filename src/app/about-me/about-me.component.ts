@@ -2,9 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {HomeService} from "@app/_services/home.service";
+import {AccountService} from "@app/_services";
 interface DropdownOption {
   label: string;
   value: number | string;
+  type?: string;
 }
 @Component({
   selector: 'app-about-me',
@@ -15,21 +18,27 @@ export class AboutMeComponent implements OnInit {
   aboutForm: FormGroup = new FormGroup({
     email: new FormControl({value: '', disabled: true}, [Validators.required, Validators.email]),
     firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', [Validators.required]),
-    linkedInLink: new FormControl('', [Validators.required]),
-    description: new FormControl('', Validators.required),
-    startDate: new FormControl('', Validators.required),
-    employmentType: new FormControl('', Validators.required),
-    travelRequirements: new FormControl('', Validators.required),
-    educationLevel: new FormControl('', Validators.required),
-    workLocation: new FormControl('', Validators.required),
-    specializations: new FormControl('', Validators.required),
-    expected_salary: new FormControl('', Validators.required),
+    lastName: new FormControl(''),
+    linkedInLink: new FormControl(''),
+    description: new FormControl(''),
+    id: new FormControl(this.accountService.userValue.id),
+    startDate: new FormControl(''),
+    employmentType: new FormControl(''),
+    // travelRequirements: new FormControl(''),
+    educationLevel: new FormControl(''),
+    workLocation: new FormControl(''),
+    specializations: new FormControl(''),
+    expected_salary: new FormControl(''),
+    name: new FormControl(''),
+    avatar: new FormControl('/assets/images/avatar.png'),
+    poster: new FormControl('/assets/images/video.jpg'),
+    video: new FormControl('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
   });
-
   timeOptions: DropdownOption[] = [
     {value: 'Full time', label: 'Full time'},
     {value: 'Part time', label: 'Part time'},
+    {value: 'Flexible schedule', label: 'Flexible schedule'},
+    {value: 'Remote Work', label: 'Remote Work'},
   ];
 
   travelOptions: DropdownOption[] = [
@@ -49,17 +58,33 @@ export class AboutMeComponent implements OnInit {
     {value: 'Degree', label: 'Degree'},
     {value: 'Agree', label: 'Agree'},
   ];
+  specializationOptions: DropdownOption[] = [
+    {value: 'java', label: 'Java', type: 'backEnd'},
+    {value: '.net', label: 'C#.Net', type: 'backEnd'},
+    {value: 'php', label: 'Php', type: 'backEnd'},
+    {value: 'js', label: 'Javascript', type: 'frontend'},
+    {value: 'html', label: 'Html', type: 'frontend'},
+    {value: 'css', label: 'Css', type: 'frontend'},
+    {value: 'python', label: 'Python', type: 'backEnd'},
+    {value: 'mysql', label: 'mysql', type: 'backEnd'},
+    {value: 'node', label: 'nodejs', type: 'backEnd'},
+  ];
 
   UploadFileService: any;
   url: any = '/assets/images/avatar-test.jpg';
-  constructor(private http: HttpClient, private router: Router) {
-  // private home: HomeService,
+  constructor(private http: HttpClient, private router: Router, private homeService: HomeService, private accountService: AccountService) {
+
   }
 
   ngOnInit(): void {
-    // this.http.post(`/api/v1/public/user/auth`, body).subscribe((res)=> {
-    //   console.log('res', res);
-    // })
+    console.log('userValue', this.accountService.userValue);
+    this.homeService.getProfile(this.accountService.userValue.id).subscribe(res => {
+      console.log('res', res);
+      if (res.length) {
+        this.aboutForm.patchValue(res[0]);
+        console.log('form', this.aboutForm);
+      }
+    });
     // this.home.getCurrentUserProfileInfo().subscribe((val) => {
     //   for (const key in val) {
     //     if (val[key]) {
@@ -94,8 +119,11 @@ export class AboutMeComponent implements OnInit {
 
   }
 
-  onSubmit() {
-    console.log('aaa', this.aboutForm.value)
+  onSubmit(): void {
+    console.log('aaa', this.aboutForm.value);
+    this.homeService.pollutedAboutMe(this.aboutForm.value).subscribe(res => {
+      console.log('res', res);
+    });
     // this.home.pollutedAboutMe(this.aboutForm.value).subscribe((val) => {
     //   this.router.navigate(['profile']);
     // })

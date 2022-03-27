@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 interface DropdownOption {
     label: string;
     value: number | string;
+    type?: string;
 }
 
 @Component({ templateUrl: 'home.component.html',
@@ -40,14 +41,23 @@ export class HomeMainComponent implements OnInit {
         responsive: true,
     };
 
-    times: DropdownOption[] = [
-        {value: 'full-time', label: 'full-time'},
-        {value: 'part-time', label: 'part-time'},
+    timeOptions: DropdownOption[] = [
+        {value: 'Full time', label: 'Full time'},
+        {value: 'Part time', label: 'Part time'},
+        {value: 'Flexible schedule', label: 'Flexible schedule'},
+        {value: 'Remote Work', label: 'Remote Work'},
     ];
 
-    specialize: DropdownOption[] = [
-        {value: 'List', label: 'List'},
-        {value: 'List 2', label: 'List2'},
+    specializationOptions: DropdownOption[] = [
+        {value: 'java', label: 'Java', type: 'backEnd'},
+        {value: '.net', label: 'C#.Net', type: 'backEnd'},
+        {value: 'php', label: 'Php', type: 'backEnd'},
+        {value: 'js', label: 'Javascript', type: 'frontend'},
+        {value: 'html', label: 'Html', type: 'frontend'},
+        {value: 'css', label: 'Css', type: 'frontend'},
+        {value: 'python', label: 'Python', type: 'backEnd'},
+        {value: 'mysql', label: 'mysql', type: 'backEnd'},
+        {value: 'node', label: 'nodejs', type: 'backEnd'},
     ];
 
     public radarChartLabels: string[] = [
@@ -70,152 +80,25 @@ export class HomeMainComponent implements OnInit {
     };
     public radarChartType: ChartType = 'radar';
 
-    listItems: any[] = [
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://techslides.com/demos/sample-videos/small.webm',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Darkhan yertayev',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        },
-        {
-          name: 'Ivan Ivanov',
-          avatar: '/assets/images/avatar.png',
-          poster: '/assets/images/video.jpg',
-          video: 'http://www.example.com/waterfall-video.mp4',
-          chartData: this.radarChartData,
-          resume: null,
-        }
-    ];
-
+    listItems: any[] = [];
 
     searchControl = new FormControl();
     searchGroup = new FormGroup({
         employmentType: new FormControl(),
         specializations: new FormControl(),
+        expected_salary: new FormControl(),
     });
 
-    test = {
-        name: 'Ivan Ivanov',
-        avatar: '/assets/images/avatar.png',
-        poster: '/assets/images/video.jpg',
-        video: 'http://www.example.com/waterfall-video.mp4',
-        chartData: this.radarChartData,
-        resume: null,
-    }
-
     currentPage = 0;
+
+    clearSearch() {
+        this.searchGroup.reset();
+    }
 
     constructor(
         private homeService: HomeService) { }
 
     ngOnInit(): void {
-
         // this.searchControl.valueChanges.subscribe(value => {
         //   console.log('res', value);
         //   const filterValue = value.toLowerCase();
@@ -223,10 +106,22 @@ export class HomeMainComponent implements OnInit {
         //     this.listItems = this.listItems.filter(item => item.toLowerCase().includes(filterValue))
         //   }
         // })
-        this.testArray = [...this.listItems];
+
+        this.homeService.getAll().subscribe(res => {
+            this.listItems = res;
+        });
+
+        // this.testArray = [...this.listItems];
         this.searchControl.valueChanges.pipe(
             startWith('')).subscribe((value) => {
-            this._filter(value)
+            this._filter(value);
+        });
+
+        this.searchGroup.valueChanges.subscribe(res => {
+            const str = Object.entries(res).filter(([, value]) => value !== null).map(([key, val]) => `${key}_like=${val}`).join('&');
+            this.homeService.getSearch(str, false).subscribe(val => {
+                this.listItems = val;
+            });
         });
 
 
@@ -270,16 +165,19 @@ export class HomeMainComponent implements OnInit {
         //     }
         // });
     }
-    testArray = [];
-
     _filter(value): any {
-        console.log('v', value);
         const filterValue = value.toString().toLowerCase();
-        if (value.length) {
-            this.listItems = this.listItems.filter(item => item.name.toLowerCase().includes(filterValue))
-        } else {
-            this.listItems = this.testArray;
+        if (filterValue.length) {
+            this.homeService.getSearch(value).subscribe(res => {
+                this.listItems = res;
+                console.log('test', res);
+            });
         }
+        // if (value.length) {
+        //     this.listItems = this.listItems.filter(item => item.name.toLowerCase().includes(filterValue))
+        // } else {
+        //     this.listItems = this.testArray;
+        // }
     }
 
     onClick(event) {

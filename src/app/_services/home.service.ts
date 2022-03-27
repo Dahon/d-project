@@ -18,16 +18,38 @@ export class HomeService {
     return this.http.get('http://103.233.134/api/v1/public/profile/info/list');
   }
 
-  pollutedAboutMe(body) {
-    return this.http.post('http://103.233.134/api/v1/private/profile/info', body);
-  }
-
   getCurrentUserProfileInfo(): Observable<any> {
     return this.http.get('http://103.233.134/api/v1/private/profile/info');
   }
 
   getPortfolio(): Observable<any> {
     return this.http.get('http://103.233.134/api/v1/private/portfolio');
+  }
+
+  getSearch(text, all = true): Observable<any> {
+      if (all) {
+          return this.http.get(`http://localhost:3000/profiles?q=${text}`);
+      } else {
+          console.log('oim')
+          return this.http.get(`http://localhost:3000/profiles?${text}`);
+      }
+  }
+
+  getAll(): Observable<any> {
+        return this.http.get(`http://localhost:3000/profiles`);
+  }
+
+    getProfile(id): Observable<any> {
+        return this.http.get(`http://localhost:3000/profiles?id=${id}`);
+    }
+
+  pollutedAboutMe(body): Observable<any> {
+    const headers: HttpHeaders = new HttpHeaders().append(
+        'Content-type',
+        'application/json'
+    );
+    const formData: FormData = new FormData();
+    return this.http.post('http://localhost:3000/profiles', body, {headers});
   }
 
 

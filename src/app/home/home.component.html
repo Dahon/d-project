@@ -29,25 +29,30 @@
                 </div>
             </div>
             <mat-card [@toggleHeight]="isShow" class="filter-block" [formGroup]="searchGroup">
-                <div class="filter-elements">
-                    <mat-checkbox>With assessment </mat-checkbox>
-                    <mat-checkbox>With portfolio</mat-checkbox>
+                <div class="filter-elements" >
+<!--                    <mat-checkbox>With assessment </mat-checkbox>-->
+<!--                    <mat-checkbox>With portfolio</mat-checkbox>-->
                     <mat-form-field class="about-me__input" appearance="outline">
                         <mat-label>full-time/part-time</mat-label>
                         <mat-select formControlName="employmentType">
-                            <mat-option *ngFor="let item of times" [value]="item.value">
+                            <mat-option *ngFor="let item of timeOptions" [value]="item.value">
                                 {{item.label}}
                             </mat-option>
                         </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="about-me__input" appearance="outline">
+                        <mat-label>expected salary</mat-label>
+                        <input type="text" matInput formControlName="expected_salary" placeholder="$200k">
                     </mat-form-field>
                     <mat-form-field class="about-me__input" appearance="outline">
                         <mat-label>Specializations</mat-label>
                         <mat-select formControlName="specializations">
-                            <mat-option *ngFor="let item of specialize" [value]="item.value">
+                            <mat-option *ngFor="let item of specializationOptions" [value]="item.value">
                                 {{item.label}}
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
+                    <button class="btn btn-primary" (click)="clearSearch()">Reset</button>
                 </div>
             </mat-card>
         </div>
@@ -58,27 +63,27 @@
                         <div class="item-header">
                             <div class="photo-item">
                                 <img [src]="item.avatar" alt="">
-                                <div class="name-item">{{item.name}}</div>
+                                <div class="name-item">{{item.firstName}} {{item.lastName}}</div>
                             </div>
                             <button mat-icon-button [matMenuTriggerFor]="menuHome" aria-label="Example icon-button with a menu">
                                 <mat-icon>more_vert</mat-icon>
                             </button>
-                            <mat-menu #menuHome="matMenu">
-                                <button mat-menu-item>
-                                    <mat-icon>dialpad</mat-icon>
-                                    <span>Redial</span>
-                                </button>
-                                <button mat-menu-item>
-                                    <mat-icon>notifications_off</mat-icon>
-                                    <span>Disable alerts</span>
-                                </button>
-                            </mat-menu>
+<!--                            <mat-menu #menuHome="matMenu">-->
+<!--                                <button mat-menu-item>-->
+<!--                                    <mat-icon>dialpad</mat-icon>-->
+<!--                                    <span>Redial</span>-->
+<!--                                </button>-->
+<!--                                <button mat-menu-item>-->
+<!--                                    <mat-icon>notifications_off</mat-icon>-->
+<!--                                    <span>Disable alerts</span>-->
+<!--                                </button>-->
+<!--                            </mat-menu>-->
                         </div>
                         <div class="item-slider">
                             <swiper class="mySwiper" #swiper [slidesPerView]="'auto'"
                                     [pagination]="true">
                                 <ng-template swiperSlide>
-                                    <video width="100%" height="100%" controls [attr.poster]="item.poster" [style.pointer-events]="currentUser ? 'auto' : 'none'">
+                                    <video width="100%" height="100%" controls [attr.poster]="item.poster" [style.pointer-events]="true ? 'auto' : 'none'">
                                         <source
                                                 [attr.src]="item.video"
                                                 type="video/mp4">
