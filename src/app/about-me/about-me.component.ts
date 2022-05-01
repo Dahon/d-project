@@ -55,8 +55,12 @@ export class AboutMeComponent implements OnInit {
   ];
 
   workLocationOptions: DropdownOption[] = [
-    {value: 'Degree', label: 'Degree'},
-    {value: 'Agree', label: 'Agree'},
+    {value: 'Almaty', label: 'Almaty'},
+    {value: 'Astana', label: 'Astana'},
+    {value: 'Taraz', label: 'Taraz'},
+    {value: 'Shymkent', label: 'Shymkent'},
+    {value: 'Aktobe', label: 'Aktobe'},
+    {value: 'Aktau', label: 'Aktau'},
   ];
   specializationOptions: DropdownOption[] = [
     {value: 'java', label: 'Java', type: 'backEnd'},
@@ -77,11 +81,13 @@ export class AboutMeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('userValue', this.accountService.userValue);
+    this.aboutForm.patchValue({
+      id: this.accountService.userValue.id,
+      email: this.accountService.userValue.email,
+    });
     this.homeService.getProfile(this.accountService.userValue.id).subscribe(res => {
-      console.log('res', res);
-      if (res.length) {
-        this.aboutForm.patchValue(res[0]);
+      if (res) {
+        this.aboutForm.patchValue(res);
         console.log('form', this.aboutForm);
       }
     });

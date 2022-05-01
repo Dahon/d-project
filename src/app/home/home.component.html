@@ -14,10 +14,10 @@
     <div class="test" scrollable (scrollPosition)="scrollHandler($event)">
         <div class="top-block">
             <div class="top-block-inner" fxLayout="column">
-        <span class="title-text">
-          BUILD YOUR PROFILE.
-          SHOWCASE YOUR TALENT
-        </span>
+                <span class="title-text">
+                  BUILD YOUR PROFILE.
+                  SHOWCASE YOUR TALENT
+                </span>
                 <div class="search-block">
                     <div class="search-input">
                         <input type="text" [formControl]="searchControl" placeholder="Search">
@@ -30,8 +30,8 @@
             </div>
             <mat-card [@toggleHeight]="isShow" class="filter-block" [formGroup]="searchGroup">
                 <div class="filter-elements" >
-<!--                    <mat-checkbox>With assessment </mat-checkbox>-->
-<!--                    <mat-checkbox>With portfolio</mat-checkbox>-->
+                    <!--                    <mat-checkbox>With assessment </mat-checkbox>-->
+                    <!--                    <mat-checkbox>With portfolio</mat-checkbox>-->
                     <mat-form-field class="about-me__input" appearance="outline">
                         <mat-label>full-time/part-time</mat-label>
                         <mat-select formControlName="employmentType">
@@ -52,18 +52,34 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <button class="btn btn-primary" (click)="clearSearch()">Reset</button>
+                    <mat-form-field class="about-me__input" appearance="outline">
+                        <mat-label>Preffered work location</mat-label>
+                        <mat-select formControlName="work_location">
+                            <mat-option *ngFor="let item of workLocationOptions" [value]="item.value">
+                                {{item.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="btn btn-danger mt-10" (click)="clearSearch()">Reset</button>
+                    <button class="btn btn-primary" (click)="onSearch()">Search</button>
                 </div>
             </mat-card>
         </div>
         <div class="items-block">
             <div class="content">
+                <p><span>Count of users: <strong>{{countUser}}</strong></span></p>
+                <p *ngIf="spec">
+                    <span>Specialization: <strong>{{spec}}</strong></span>
+                </p>
+                <p *ngIf="city">
+                    <span>City: <strong>{{city}}</strong></span>
+                </p>
                 <ng-container *ngFor="let item of listItems; let index = index; let last= last;">
                     <mat-card (click)="onClick($event)">
                         <div class="item-header">
                             <div class="photo-item">
-                                <img [src]="item.avatar" alt="">
-                                <div class="name-item">{{item.firstName}} {{item.lastName}}</div>
+                                <img src="/assets/images/avatar.png" alt=""> <!--[src]="item.avatar"-->
+                                <div class="name-item">{{item.name}} {{item.lastname}}</div>
                             </div>
                             <button mat-icon-button [matMenuTriggerFor]="menuHome" aria-label="Example icon-button with a menu">
                                 <mat-icon>more_vert</mat-icon>
@@ -80,25 +96,12 @@
 <!--                            </mat-menu>-->
                         </div>
                         <div class="item-slider">
-                            <swiper class="mySwiper" #swiper [slidesPerView]="'auto'"
-                                    [pagination]="true">
-                                <ng-template swiperSlide>
-                                    <video width="100%" height="100%" controls [attr.poster]="item.poster" [style.pointer-events]="true ? 'auto' : 'none'">
-                                        <source
-                                                [attr.src]="item.video"
-                                                type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </ng-template>
-<!--                                <ng-template swiperSlide>-->
-<!--                                    <canvas baseChart-->
-<!--                                            [data]="item.chartData"-->
-<!--                                            [options]="radarChartOptions"-->
-<!--                                            [legend]="false"-->
-<!--                                            [type]="radarChartType">-->
-<!--                                    </canvas>-->
-<!--                                </ng-template>-->
-                            </swiper>
+                            <video style="margin-top: 10px;" width="100%" height="100%" controls poster="/assets/images/video.jpg" [style.pointer-events]="true ? 'auto' : 'none'"> <!--[attr.poster]="item.poster"-->
+                                <source
+                                        [attr.src]="item.video"
+                                        type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
                         <div class="item-buttons">
                             <ul>

@@ -1,11 +1,15 @@
 ﻿<!-- nav -->
 <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-    <div class="navbar-nav">
+    <div class="navbar-nav" style="flex-wrap: wrap; justify-content: center">
         <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
 <!--        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>-->
         <a class="nav-item nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
-        <a class="nav-item nav-link" routerLink="/about" routerLinkActive="active">About-me</a>
-        <a class="nav-item nav-link" routerLink="/videoMe" routerLinkActive="active">VideoMe</a>
+        <a *ngIf="!user.isCompany; else elseBlock" class="nav-item nav-link" routerLink="/about" routerLinkActive="active">About-me</a>
+        <ng-template #elseBlock>
+            <a class="nav-item nav-link" routerLink="/about-company" routerLinkActive="active">Company</a>
+        </ng-template>
+        <a class="nav-item nav-link" routerLink="/jobs" routerLinkActive="active">Jobs</a>
+        <a *ngIf="!user.isCompany;" class="nav-item nav-link" routerLink="/videoMe" routerLinkActive="active">VideoMe</a>
 <!--        <a class="nav-item nav-link" routerLink="/practise" routerLinkActive="active">Practise</a>-->
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>

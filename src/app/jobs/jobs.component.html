@@ -1,0 +1,97 @@
+<div class="jobs">
+    <div class="items-block">
+        <div class="top-block">
+            <div class="top-block-inner" fxLayout="column">
+                <div class="search-block">
+                    <div class="search-input">
+                        <input type="text" [formControl]="searchControl" placeholder="Search">
+                        <img src="/assets/icons/search-icon.svg" alt="">
+                    </div>
+                    <button pButton type="button" class="ui-button-secondary" label="Фильтр" [ngClass]="{active: isShow}" (click)="isShow = !isShow">
+                        <img src="/assets/icons/filter-icon.svg" alt="">
+                    </button>
+                </div>
+            </div>
+            <mat-card [@toggleHeight]="isShow" class="filter-block" [formGroup]="searchGroup">
+                <div class="filter-elements" >
+                    <!--                    <mat-checkbox>With assessment </mat-checkbox>-->
+                    <!--                    <mat-checkbox>With portfolio</mat-checkbox>-->
+                    <mat-form-field class="about-me__input" appearance="outline">
+                        <mat-label>full-time/part-time</mat-label>
+                        <mat-select formControlName="employmentType">
+                            <mat-option *ngFor="let item of timeOptions" [value]="item.value">
+                                {{item.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="about-me__input" appearance="outline">
+                        <mat-label>expected salary</mat-label>
+                        <input type="text" matInput formControlName="expected_salary" placeholder="$200k">
+                    </mat-form-field>
+                    <mat-form-field class="about-me__input" appearance="outline">
+                        <mat-label>Specializations</mat-label>
+                        <mat-select formControlName="specializations">
+                            <mat-option *ngFor="let item of specializationOptions" [value]="item.value">
+                                {{item.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="about-me__input" appearance="outline">
+                        <mat-label>Preffered work location</mat-label>
+                        <mat-select formControlName="work_location">
+                            <mat-option *ngFor="let item of workLocationOptions" [value]="item.value">
+                                {{item.label}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="btn btn-danger mt-10" (click)="clearSearch()">Reset</button>
+                    <button class="btn btn-primary" (click)="onSearch()">Search</button>
+                </div>
+            </mat-card>
+        </div>
+        <div class="content">
+            <div *ngIf="listItems.length;">
+                <ng-container *ngFor="let item of listItems; let index = index; let last= last;">
+                    <mat-card (click)="onClick($event)" style="margin: 20px 0;">
+                        <div class="item-header" style="display: flex; justify-content: space-around;">
+                            <div>
+                                <strong>Company name</strong>
+                                <p>{{item.name}}</p>
+                                <strong>Education level</strong>
+                                <p>{{item.educationLevel}}</p>
+                                <strong>Specializations</strong>
+                                <p>{{item.specializations}}</p>
+                            </div>
+
+                            <div>
+                                <strong>Work Location</strong>
+                                <p>{{item.workLocation}}</p>
+                                <strong>Salary</strong>
+                                <p>{{item.expected_salary}}</p>
+                            </div>
+
+                        </div>
+                        <div class="item-slider">
+                            <swiper class="mySwiper" #swiper [slidesPerView]="'auto'"
+                                    [pagination]="true">
+                                <ng-template swiperSlide>
+                                    <!--                                <video width="100%" height="100%" controls [attr.poster]="item.poster" [style.pointer-events]="true ? 'auto' : 'none'">-->
+                                    <!--                                    <source-->
+                                    <!--                                            [attr.src]="item.video"-->
+                                    <!--                                            type="video/mp4">-->
+                                    <!--                                    Your browser does not support the video tag.-->
+                                    <!--                                </video>-->
+                                </ng-template>
+                            </swiper>
+                        </div>
+                    </mat-card>
+                    <div *ngIf="index+1 == 10 || (last && advers)" class="advertising-block">
+                        <img width="100%" src="/assets/images/reklama.jpg" alt="">
+                    </div>
+                </ng-container>
+            </div>
+            <p *ngIf="!listItems.length" style="font-size: 20px; display: flex; margin-top: 20px; justify-content: center; color: #0D0D0D">Empty </p>
+        </div>
+
+    </div>
+</div>

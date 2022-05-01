@@ -20,8 +20,8 @@
         </mat-form-field>
         <mat-form-field class="about-me__input">
             <mat-label>First name</mat-label>
-            <input type="text" matInput formControlName="firstName">
-            <mat-error *ngIf="aboutForm.get('firstName').hasError('required')">
+            <input type="text" matInput formControlName="name">
+            <mat-error *ngIf="aboutForm.get('name').hasError('required')">
               First name is <strong>required</strong>
             </mat-error>
         </mat-form-field>

@@ -5,4 +5,7 @@
     firstName: string;
     lastName: string;
     token: string;
+    email: string;
+    name: string;
+    isCompany: boolean;
 }

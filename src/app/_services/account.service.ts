@@ -16,7 +16,7 @@ export class AccountService {
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user'))?.user);
         this.user = this.userSubject.asObservable();
     }
 
@@ -24,10 +24,9 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username, password) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    login(email, password) {
+        return this.http.post<User>(`${environment.apiUrl}/auth/login`, { email, password })
             .pipe(map(user => {
-              console.log('asdsadasd', user)
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
@@ -43,7 +42,7 @@ export class AccountService {
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+        return this.http.post(`${environment.apiUrl}/auth/register`, user);
     }
 
     getAll() {
@@ -84,7 +83,6 @@ export class AccountService {
     saveProfile(user: any) {
       return this.http.post<User>(`${environment.apiUrl}/users/profile`, { user })
         .pipe(map(x => {
-          console.log('rre', user);
           const user2 = { ...this.userValue, ...user };
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('user', JSON.stringify(user2));

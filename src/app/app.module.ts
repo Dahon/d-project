@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
+// import { fakeBackendProvider } from './_helpers';
 
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -66,6 +66,8 @@ import { environment } from '../environments/environment';
 import {AboutMeComponent} from '@app/about-me/about-me.component';
 import {ProfileSecondComponent} from '@app/profile2/profile.component';
 import {PractiseInterviewComponent} from '@app/practise-interview/practise-interview';
+import {AboutCompanyComponent} from "@app/about-company/about-company.component";
+import {JobsComponent} from "@app/jobs/jobs.component";
 @NgModule({
     imports: [
         BrowserModule,
@@ -143,16 +145,18 @@ import {PractiseInterviewComponent} from '@app/practise-interview/practise-inter
         ProfileComponent ,
         VideoMeComponent,
         AboutMeComponent,
+        AboutCompanyComponent,
         ProfileSecondComponent,
         PractiseInterviewComponent,
-        InfinityScrollDirective
+        InfinityScrollDirective,
+        JobsComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
-        fakeBackendProvider
+        // fakeBackendProvider
     ],
     bootstrap: [AppComponent]
 })
