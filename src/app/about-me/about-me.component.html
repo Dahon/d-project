@@ -27,15 +27,15 @@
         </mat-form-field>
         <mat-form-field class="about-me__input">
             <mat-label>Last name</mat-label>
-            <input type="text" matInput formControlName="lastName">
-            <mat-error *ngIf="aboutForm.get('lastName').hasError('required')">
+            <input type="text" matInput formControlName="lastname">
+            <mat-error *ngIf="aboutForm.get('lastname').hasError('required')">
               Last name is <strong>required</strong>
             </mat-error>
         </mat-form-field>
         <mat-form-field class="about-me__input">
             <mat-label>Linkedin profile</mat-label>
-            <input type="text" matInput formControlName="linkedInLink">
-            <mat-error *ngIf="aboutForm.get('linkedInLink').hasError('required')">
+            <input type="text" matInput formControlName="linkedin_link">
+            <mat-error *ngIf="aboutForm.get('linkedin_link').hasError('required')">
                 Link profile is <strong>required</strong>
             </mat-error>
         </mat-form-field>
@@ -48,13 +48,13 @@
         </mat-form-field>
         <mat-form-field class="about-me__input">
             <mat-label>I started my career in the year...</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="startDate">
+            <input matInput [matDatepicker]="picker" formControlName="start_date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <mat-form-field class="about-me__input" appearance="outline">
             <mat-label>Preferred employment type</mat-label>
-            <mat-select formControlName="employmentType">
+            <mat-select formControlName="employment_type">
               <mat-option *ngFor="let item of timeOptions" [value]="item.value">
                 {{item.label}}
               </mat-option>
@@ -70,7 +70,7 @@
 <!--        </mat-form-field>-->
         <mat-form-field class="about-me__input" appearance="outline">
             <mat-label>Education level</mat-label>
-            <mat-select formControlName="educationLevel">
+            <mat-select formControlName="education_level">
               <mat-option *ngFor="let item of educationOptions" [value]="item.value">
                 {{item.label}}
               </mat-option>
@@ -78,7 +78,7 @@
         </mat-form-field>
         <mat-form-field class="about-me__input" appearance="outline">
             <mat-label>Preffered work location</mat-label>
-            <mat-select formControlName="workLocation">
+            <mat-select formControlName="work_location">
               <mat-option *ngFor="let item of workLocationOptions" [value]="item.value">
                 {{item.label}}
               </mat-option>

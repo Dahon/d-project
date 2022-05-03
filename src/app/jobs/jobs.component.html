@@ -58,32 +58,32 @@
                                 <strong>Company name</strong>
                                 <p>{{item.name}}</p>
                                 <strong>Education level</strong>
-                                <p>{{item.educationLevel}}</p>
+                                <p>{{item.education_level}}</p>
                                 <strong>Specializations</strong>
                                 <p>{{item.specializations}}</p>
                             </div>
 
                             <div>
                                 <strong>Work Location</strong>
-                                <p>{{item.workLocation}}</p>
+                                <p>{{item.wor_location}}</p>
                                 <strong>Salary</strong>
                                 <p>{{item.expected_salary}}</p>
                             </div>
 
                         </div>
-                        <div class="item-slider">
-                            <swiper class="mySwiper" #swiper [slidesPerView]="'auto'"
-                                    [pagination]="true">
-                                <ng-template swiperSlide>
-                                    <!--                                <video width="100%" height="100%" controls [attr.poster]="item.poster" [style.pointer-events]="true ? 'auto' : 'none'">-->
-                                    <!--                                    <source-->
-                                    <!--                                            [attr.src]="item.video"-->
-                                    <!--                                            type="video/mp4">-->
-                                    <!--                                    Your browser does not support the video tag.-->
-                                    <!--                                </video>-->
-                                </ng-template>
-                            </swiper>
-                        </div>
+    <!--                        <div class="item-slider">-->
+    <!--                            <swiper class="mySwiper" #swiper [slidesPerView]="'auto'"-->
+    <!--                                    [pagination]="true">-->
+    <!--                                <ng-template swiperSlide>-->
+    <!--                                    &lt;!&ndash;                                <video width="100%" height="100%" controls [attr.poster]="item.poster" [style.pointer-events]="true ? 'auto' : 'none'">&ndash;&gt;-->
+    <!--                                    &lt;!&ndash;                                    <source&ndash;&gt;-->
+    <!--                                    &lt;!&ndash;                                            [attr.src]="item.video"&ndash;&gt;-->
+    <!--                                    &lt;!&ndash;                                            type="video/mp4">&ndash;&gt;-->
+    <!--                                    &lt;!&ndash;                                    Your browser does not support the video tag.&ndash;&gt;-->
+    <!--                                    &lt;!&ndash;                                </video>&ndash;&gt;-->
+    <!--                                </ng-template>-->
+    <!--                            </swiper>-->
+    <!--                        </div>-->
                     </mat-card>
                     <div *ngIf="index+1 == 10 || (last && advers)" class="advertising-block">
                         <img width="100%" src="/assets/images/reklama.jpg" alt="">

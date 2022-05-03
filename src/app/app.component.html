@@ -6,7 +6,7 @@
         <a class="nav-item nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
         <a *ngIf="!user.isCompany; else elseBlock" class="nav-item nav-link" routerLink="/about" routerLinkActive="active">About-me</a>
         <ng-template #elseBlock>
-            <a class="nav-item nav-link" routerLink="/about-company" routerLinkActive="active">Company</a>
+            <a class="nav-item nav-link" routerLink="/about-company" routerLinkActive="active">About-company</a>
         </ng-template>
         <a class="nav-item nav-link" routerLink="/jobs" routerLinkActive="active">Jobs</a>
         <a *ngIf="!user.isCompany;" class="nav-item nav-link" routerLink="/videoMe" routerLinkActive="active">VideoMe</a>

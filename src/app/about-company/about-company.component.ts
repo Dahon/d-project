@@ -82,6 +82,7 @@ export class AboutCompanyComponent implements OnInit {
     this.homeService.getCompany(this.accountService.userValue.id).subscribe(res => {
       if (res) {
         this.aboutForm.patchValue(res);
+        this.aboutForm.patchValue({id: this.accountService.userValue.id});
         console.log('form', this.aboutForm);
       }
     });

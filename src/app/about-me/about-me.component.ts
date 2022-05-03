@@ -18,21 +18,21 @@ export class AboutMeComponent implements OnInit {
   aboutForm: FormGroup = new FormGroup({
     email: new FormControl({value: '', disabled: true}, [Validators.required, Validators.email]),
     firstName: new FormControl('', Validators.required),
-    lastName: new FormControl(''),
-    linkedInLink: new FormControl(''),
+    lastname: new FormControl(''),
+    linkedin_link: new FormControl(''),
     description: new FormControl(''),
     id: new FormControl(this.accountService.userValue.id),
-    startDate: new FormControl(''),
-    employmentType: new FormControl(''),
+    start_date: new FormControl(''),
+    employment_type: new FormControl(''),
     // travelRequirements: new FormControl(''),
-    educationLevel: new FormControl(''),
-    workLocation: new FormControl(''),
+    education_level: new FormControl(''),
+    work_location: new FormControl(''),
     specializations: new FormControl(''),
     expected_salary: new FormControl(''),
     name: new FormControl(''),
-    avatar: new FormControl('/assets/images/avatar.png'),
-    poster: new FormControl('/assets/images/video.jpg'),
-    video: new FormControl('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
+    avatar_src: new FormControl('/assets/images/avatar.png'),
+    poster_src: new FormControl('/assets/images/video.jpg'),
+    video_url: new FormControl('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
   });
   timeOptions: DropdownOption[] = [
     {value: 'Full time', label: 'Full time'},
@@ -85,9 +85,11 @@ export class AboutMeComponent implements OnInit {
       id: this.accountService.userValue.id,
       email: this.accountService.userValue.email,
     });
+    console.log('this.accountService.userValue.id', this.accountService.userValue);
     this.homeService.getProfile(this.accountService.userValue.id).subscribe(res => {
       if (res) {
         this.aboutForm.patchValue(res);
+        this.aboutForm.patchValue({id: this.accountService.userValue.id});
         console.log('form', this.aboutForm);
       }
     });

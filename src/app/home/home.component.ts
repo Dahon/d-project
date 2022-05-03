@@ -119,7 +119,7 @@ export class HomeMainComponent implements OnInit {
         const str = Object.entries(this.searchGroup.value).filter(([, value]) => value !== null).map(([key, val]) => `${key}=${val}`).join('&');
         this.homeService.getSearch(str, false)
             .subscribe(val => {
-                this.listItems = this.currentUser ? val.filter(user => user.user.id !== this.currentUser.id) : val;
+                this.listItems = val;
                 this.countUser = val.length;
                 this.isShow = !this.isShow;
             });
@@ -158,8 +158,7 @@ export class HomeMainComponent implements OnInit {
             this.currentUser = x;
             console.log('ttt', this.currentUser);
             this.homeService.getUserShortList().subscribe(res => {
-                console.log('res', res);
-                this.listItems = this.currentUser ? res.filter(user => user.user.id !== this.currentUser.id) : res;
+                this.listItems = res;
                 this.countUser = this.listItems.length;
             });
         });

@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "pwa": "ng build --prod && http-server ./dist/angular-project"
+    "pwa": "ng build --prod ./dist/angular-project"
   },
   "private": true,
   "dependencies": {
