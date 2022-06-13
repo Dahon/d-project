@@ -9,7 +9,6 @@ export class AppComponent {
 
     constructor(private accountService: AccountService) {
         this.accountService.user.subscribe((x: any) => {
-            console.log('x', x);
             if (x) {
                 this.user = {...x, isCompany: x.is_company};
             }

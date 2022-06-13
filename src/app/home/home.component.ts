@@ -6,7 +6,9 @@ import {HomeService} from '@app/_services/home.service';
 import {SwiperComponent} from 'swiper/angular';
 import {ChartConfiguration, ChartData, ChartType} from 'chart.js';
 import {MatDialog} from '@angular/material/dialog';
-import {AccountService} from "@app/_services";
+import {AccountService} from '@app/_services';
+import {DialogCompComponent} from "@app/_components/dialogComp.component";
+
 
 interface DropdownOption {
     label: string;
@@ -127,7 +129,8 @@ export class HomeMainComponent implements OnInit {
 
     constructor(
         private homeService: HomeService,
-        private authService: AccountService) {
+        private authService: AccountService,
+        public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -228,9 +231,9 @@ export class HomeMainComponent implements OnInit {
     }
 
     opendDialog() {
-        // const dialogRef = this.dialog.open(AuthDialogOverViewComponent, {
-        //     width: '250px',
-        // });
+        const dialogRef = this.dialog.open(DialogCompComponent, {
+            width: '250px',
+        });
     }
 
     advers = false;

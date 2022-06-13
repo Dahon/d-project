@@ -5,6 +5,11 @@ import {map, mergeMap, reduce, tap} from 'rxjs/operators';
 import {User} from '@app/_models';
 import {environment} from '@environments/environment';
 
+export interface IRequestWithUser extends Request {
+    user: User;
+}
+
+
 @Injectable({
     providedIn: 'root'
 })
@@ -15,6 +20,10 @@ export class HomeService {
 
     getUserShortList(): Observable<any> {
         return this.http.get<User[]>(`${environment.apiUrl}/user/profiles`);
+    }
+
+    getUserImage(id): any {
+        return this.http.get(`${environment.apiUrl}/database-files/${id}`);
     }
 
     getUserShortListPublic(): Observable<any> {
@@ -43,7 +52,7 @@ export class HomeService {
     }
 
     getAllCompany(): Observable<any> {
-        return this.http.get(`http://localhost:3000/user/companies`);
+        return this.http.get(`${environment.apiUrl}/user/companies2`);
     }
 
     getProfile(id): Observable<any> {
@@ -87,17 +96,18 @@ export class HomeService {
     // }
 
 
-    uploadPhoto(file: File) {
+    uploadPhoto(file: File, id) {
         const extension = file.name.slice(file.name.lastIndexOf('.') + 1);
         const headers: HttpHeaders = new HttpHeaders().append(
             'Content-type',
             'image/jpeg; charset=utf-8'
         );
         console.log(file, headers, extension);
+        console.log('123');
         const formData: FormData = new FormData();
-        formData.append('photo', file, file.name);
+        formData.append('file', file, file.name);
 
-        return this.http.post('http://103.233.134/api/v1/private/profile/photo', formData)
+        return this.http.post(`${environment.apiUrl}/user/avatar/${id}`, formData);
         // .pipe(tap(() => this.photoUrl$.emit()));
     }
 

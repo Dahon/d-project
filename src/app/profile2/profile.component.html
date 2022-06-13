@@ -91,7 +91,7 @@
         <div class="profile-main__video-block__video">
             <video width="100%" height="100%" controls poster="/assets/images/video.jpg">
                 <source 
-                  src="http://www.example.com/waterfall-video.mp4" 
+                  [attr.src]="url"
                   type="video/mp4">
                  Your browser does not support the video tag.
             </video>
@@ -129,11 +129,11 @@
                 <svg width="12" height="18" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.97844 1.71252C8.83684 0.57072 7.45907 0 5.84548 0C4.23181 0 2.8542 0.57084 1.71252 1.71252C0.57088 2.85416 0 4.23181 0 5.84548C0 6.67521 0.125565 7.35634 0.376655 7.88915L4.54389 16.7261C4.65809 16.9771 4.83512 17.175 5.07486 17.3195C5.31463 17.4641 5.57148 17.5365 5.84556 17.5365C6.11957 17.5365 6.37653 17.4641 6.61627 17.3195C6.85604 17.175 7.03667 16.9771 7.15847 16.7261L11.314 7.88915C11.5652 7.35634 11.6909 6.67517 11.6909 5.84548C11.6911 4.23181 11.1203 2.85432 9.97844 1.71252ZM7.91186 7.91198C7.3411 8.4827 6.65234 8.76818 5.84548 8.76818C5.03863 8.76818 4.34986 8.4827 3.77894 7.91198C3.2081 7.34106 2.92262 6.6523 2.92262 5.84544C2.92262 5.03867 3.2081 4.34978 3.77894 3.77902C4.34986 3.20818 5.03875 2.9227 5.84548 2.9227C6.65234 2.9227 7.3411 3.20818 7.91186 3.77902C8.48266 4.34974 8.76814 5.03867 8.76814 5.84544C8.76814 6.65222 8.4827 7.34094 7.91186 7.91198Z" fill="#B6B6B6"/>
                 </svg>
-                <span>Kangar</span>
+                <span>{{user?.work_location ? user.work_location : 'yet not set'}}</span>
             </li>
             <li>
                 <img src="/assets/icons/bag.svg" alt="">
-                <span>Deagree</span>
+                <span>{{user?.employment_type ? user.employment_type : 'yet not set'}}</span>
             </li>
         </ul>
     </div>

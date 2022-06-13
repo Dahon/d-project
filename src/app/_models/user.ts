@@ -8,4 +8,5 @@
     email: string;
     name: string;
     isCompany: boolean;
+    avatarId: any;
 }

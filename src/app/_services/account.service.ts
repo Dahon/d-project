@@ -9,7 +9,7 @@ import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<User>;
+    public userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
     constructor(
@@ -34,6 +34,7 @@ export class AccountService {
             }));
     }
 
+
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
@@ -50,7 +51,7 @@ export class AccountService {
     }
 
     getById(id: string) {
-        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+        return this.http.get<User>(`${environment.apiUrl}/user/${id}`);
     }
 
     update(id, params) {
@@ -92,14 +93,14 @@ export class AccountService {
     }
 
   updateUser(user: any) {
-    const users: any = JSON.parse(localStorage.getItem('angular-10-registration-login-example-users'));
+    const users: any = JSON.parse(localStorage.getItem('user'));
     console.log('users', users);
     for (let i in users) {
       if (users[i].id == user.id) {
         users[i].likes = user.likes;
       }
     }
-    localStorage.setItem('angular-10-registration-login-example-users', JSON.stringify(users));
+    localStorage.setItem('user', JSON.stringify(users));
   }
 
 }

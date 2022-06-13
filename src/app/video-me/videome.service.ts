@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
+import {environment} from "@environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,13 @@ export class VideomeService {
   constructor(private http: HttpClient) { }
 
 
-  postLoad(duration: any, video: any) {
+  postLoad(id: any, video: any) {
     console.log('vvv', video);
-    return this.http.post<any>('http://103.233.0.134/api/v1/private/videome', video)
-        .pipe(map(val => {
-          console.log('val', val);
-        }));
+    return this.http.post(`${environment.apiUrl}/user/video/${id}`, video);
+    // return this.http.post<any>('http://103.233.0.134/api/v1/private/videome', video)
+    //     .pipe(map(val => {
+    //       console.log('val', val);
+    //     }));
   }
 
   postLoadVideoPRactise(duration: any, video: any) {

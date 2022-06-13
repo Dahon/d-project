@@ -78,7 +78,7 @@
                     <mat-card (click)="onClick($event)">
                         <div class="item-header">
                             <div class="photo-item">
-                                <img src="/assets/images/avatar.png" alt=""> <!--[src]="item.avatar"-->
+                                <img [src]="'http://localhost:3000/database-files/'+item?.user?.avatarId" alt=""> <!--[src]="item.avatar"-->
                                 <div class="name-item">{{item.name}} {{item.lastname}}</div>
                             </div>
                             <button mat-icon-button [matMenuTriggerFor]="menuHome" aria-label="Example icon-button with a menu">
@@ -98,7 +98,7 @@
                         <div class="item-slider">
                             <video style="margin-top: 10px;" width="100%" height="100%" controls poster="/assets/images/video.jpg" [style.pointer-events]="true ? 'auto' : 'none'"> <!--[attr.poster]="item.poster"-->
                                 <source
-                                        [attr.src]="item.video"
+                                        [attr.src]="'http://localhost:3000/database-video-files/'+item?.user?.videoId"
                                         type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
@@ -108,8 +108,8 @@
                                 <li>
                                     <a
                                             [style.pointer-events]="currentUser ? 'auto' : 'none'"
-                                            [routerLink]="'/profile/'+item.userProfileId">
-                                        <mat-icon>person_outline</mat-icon>
+                                            [routerLink]="'/profile/'+item.user.id">
+                                        <mat-icon>leaderboard</mat-icon>
                                     </a>
                                 </li>
 <!--                                <li>-->
@@ -130,14 +130,14 @@
 <!--                                    <mat-icon>thumb_up_off_alt</mat-icon>-->
 <!--                                </li>-->
                                 <li>
-                                    <a [attr.href]="item?.resume" target="_self"  download="fileName.pdf">
+                                    <a href="https://writing.colostate.edu/guides/documents/resume/functionalsample.pdf" download="https://writing.colostate.edu/guides/documents/resume/functionalsample.pdf">
                                         <mat-icon>description</mat-icon>
                                     </a>
                                 </li>
                                 <li>
                                     <a
                                             [style.pointer-events]="currentUser ? 'auto' : 'none'"
-                                            routerLink="/portfolio">
+                                            [routerLink]="'/about/'+item.user.id">
                                         <mat-icon>person_outline</mat-icon>
                                     </a>
                                 </li>

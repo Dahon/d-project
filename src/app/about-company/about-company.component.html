@@ -1,12 +1,12 @@
 <div class="about-me">
-<!--    <div class="about-me__logo">-->
-<!--        <img [src]="url" alt="">-->
-<!--        <input multiple type="file" #file accept="image/*" style="display:none" (change)="uploadPhoto(file.files)"/>-->
-<!--        <button mat-raised-button (click)="file.click()">-->
-<!--            UPLOAD-->
-<!--            <mat-icon>upload</mat-icon>-->
-<!--        </button>-->
-<!--    </div>-->
+    <div class="about-me__logo">
+        <img [src]="url" alt="">
+        <input multiple type="file" #file accept="image/*" style="display:none" (change)="uploadPhoto(file.files)"/>
+        <button mat-raised-button (click)="file.click()">
+            UPLOAD
+            <mat-icon>upload</mat-icon>
+        </button>
+    </div>
     <form class="about-me__form" [formGroup]="aboutForm">
         <mat-form-field class="about-me__input">
           <mat-label>Email</mat-label>

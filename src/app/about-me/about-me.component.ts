@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HomeService} from "@app/_services/home.service";
 import {AccountService} from "@app/_services";
 interface DropdownOption {
@@ -73,24 +73,31 @@ export class AboutMeComponent implements OnInit {
     {value: 'mysql', label: 'mysql', type: 'backEnd'},
     {value: 'node', label: 'nodejs', type: 'backEnd'},
   ];
-
+  subscription;
   UploadFileService: any;
   url: any = '/assets/images/avatar-test.jpg';
-  constructor(private http: HttpClient, private router: Router, private homeService: HomeService, private accountService: AccountService) {
-
+  constructor(private http: HttpClient, private router: Router, private homeService: HomeService, private accountService: AccountService, private activeRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.aboutForm.patchValue({
-      id: this.accountService.userValue.id,
-      email: this.accountService.userValue.email,
-    });
-    console.log('this.accountService.userValue.id', this.accountService.userValue);
-    this.homeService.getProfile(this.accountService.userValue.id).subscribe(res => {
-      if (res) {
-        this.aboutForm.patchValue(res);
-        this.aboutForm.patchValue({id: this.accountService.userValue.id});
-        console.log('form', this.aboutForm);
+    this.subscription = this.activeRoute.params.subscribe(params => {
+      console.log('params[\'id\']', params.id);
+      if (params.id) {
+        this.url = `http://localhost:3000/database-files/${this.accountService.userValue.avatarId}`
+        this.homeService.getProfile(params.id).subscribe(res => {
+          this.aboutForm.patchValue(res);
+          this.aboutForm.disable();
+        });
+      } else {
+        this.aboutForm.patchValue({
+          id: this.accountService.userValue.id,
+          email: this.accountService.userValue.email,
+        });
+        this.url = `http://localhost:3000/database-files/${this.accountService.userValue.avatarId}`
+        this.homeService.getProfile(this.accountService.userValue.id).subscribe(res => {
+          this.aboutForm.patchValue(res);
+          this.aboutForm.patchValue({id: this.accountService.userValue.id});
+        });
       }
     });
     // this.home.getCurrentUserProfileInfo().subscribe((val) => {
@@ -113,17 +120,21 @@ export class AboutMeComponent implements OnInit {
         return;
     }
 
-    let reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsDataURL(list[0]);
 
+    // tslint:disable-next-line:variable-name
     reader.onload = (_event) => {
       this.url = reader.result;
     };
 
-    // this.home.uploadPhoto(list[0]).subscribe((da) => {
-    //   console.log(da)
-    //
-    // });
+    this.homeService.uploadPhoto(list[0], this.accountService.userValue.id).subscribe((da: any) => {
+      this.accountService.getById(this.accountService.userValue.id).subscribe(res => {
+        const users: any = JSON.parse(localStorage.getItem('user'));
+        localStorage.setItem('user', JSON.stringify({...users, user: res}));
+        this.accountService.userSubject.next({...users, user: res});
+      });
+    });
 
   }
 

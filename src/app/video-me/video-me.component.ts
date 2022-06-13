@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import {VideoRecordingService} from '@app/video-me/video-recording.service';
 import {VideomeService} from '@app/video-me/videome.service';
 import {AudioRecordingService} from '@app/video-me/audio-recording.service';
+import {AccountService} from "@app/_services";
 
 @Component({
   selector: 'app-video-me',
@@ -60,7 +61,8 @@ export class VideoMeComponent implements OnInit {
     private audioRecordingService: AudioRecordingService,
     private videoRecordingService: VideoRecordingService,
     private sanitizer: DomSanitizer,
-    private videomeService: VideomeService
+    private videomeService: VideomeService,
+    private accountService: AccountService,
   ) {
 
     this.videoRecordingService.recordingFailed().subscribe(() => {
@@ -86,7 +88,11 @@ export class VideoMeComponent implements OnInit {
     this.videoRecordingService.getRecordedBlob().subscribe((data) => {
       this.videoBlob = data.blob;
       this.videoName = data.title;
-      console.log('asdasd', data);
+      const formData = new FormData();
+      formData.append('video/webm', data.blob, data.title);
+      this.videomeService.postLoad(this.accountService.userValue.id, formData).subscribe(res => {
+        console.log('res', res);
+      });
       this.videoBlobUrl = this.sanitizer.bypassSecurityTrustUrl(data.url);
       this.ref.detectChanges();
     });
@@ -184,16 +190,17 @@ export class VideoMeComponent implements OnInit {
       this.selectedQuestion = this.question[this.number];
       const blob = new Blob([this.videoBlob], { type: 'video/webm' });
       const url = window.URL.createObjectURL(blob);
-      var formData = new FormData();
-      formData.append('video', blob, this.videoName);
-      formData.append('duration', '25');
-      // formData.append('video/webm', [blob], filename+ '.' + blob.type.split('/')[1]);
-      // formData.append(type, filename);
-      // formData.append(type + '-blob', blob, filename);
-
-      // this.videomeService.postLoad(25, formData).subscribe(res => {
+      console.log('url', url);
+      // const formData = new FormData();
+      // formData.append('video/webm', url, this.videoName);
+      // // formData.append('duration', '25');
+      // // formData.append('video/webm', [blob], filename+ '.' + blob.type.split('/')[1]);
+      // // formData.append(type, filename);
+      // // formData.append(type + '-blob', blob, filename);
+      //
+      // this.videomeService.postLoad(this.accountService.userValue.id, formData).subscribe(res => {
       //   console.log('res', res);
-      // })
+      // });
       // this.downloadVideoRecordedData();
       return;
     }
@@ -260,19 +267,19 @@ export class VideoMeComponent implements OnInit {
     console.log('blob', blob);
     const url = window.URL.createObjectURL(blob);
 
-    var formData = new FormData();
-    formData.append('video', blob, filename);
-    formData.append('duration', '25');
-    // formData.append('video/webm', [blob], filename+ '.' + blob.type.split('/')[1]);
+    const formData = new FormData();
+    formData.append('video.webm', data, filename);
+    // formData.append('duration', '25');
+    // formData.append('video/webm', blob, filename + '.' + blob.type.split('/')[1]);
     // formData.append(type, filename);
     // formData.append(type + '-blob', blob, filename);
 
     console.log('formData', formData);
 
 
-    this.videomeService.postLoad(25, formData).subscribe(res => {
-      console.log('res', res);
-    })
+    // this.videomeService.postLoad(25, formData).subscribe(res => {
+    //   console.log('res', res);
+    // });
     //this.video.srcObject = stream;
     //const url = data;
     const anchor = document.createElement('a');

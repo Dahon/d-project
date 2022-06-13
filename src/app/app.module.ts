@@ -68,6 +68,7 @@ import {ProfileSecondComponent} from '@app/profile2/profile.component';
 import {PractiseInterviewComponent} from '@app/practise-interview/practise-interview';
 import {AboutCompanyComponent} from "@app/about-company/about-company.component";
 import {JobsComponent} from "@app/jobs/jobs.component";
+import {DialogCompComponent} from "@app/_components/dialogComp.component";
 @NgModule({
     imports: [
         BrowserModule,
@@ -149,7 +150,8 @@ import {JobsComponent} from "@app/jobs/jobs.component";
         ProfileSecondComponent,
         PractiseInterviewComponent,
         InfinityScrollDirective,
-        JobsComponent
+        JobsComponent,
+        DialogCompComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

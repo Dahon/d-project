@@ -111,6 +111,7 @@ export class JobsComponent implements OnInit {
     searchControl = new FormControl();
 
     ngOnInit(): void {
+        console.log('222')
         this.homeService.getAllCompany().subscribe(res => {
             this.listItems = res;
         });

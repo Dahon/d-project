@@ -210,7 +210,18 @@
             }
         }
     }
-
+    @media (min-width: 992px) {
+        .jobs {
+            width: 900px;
+            margin: 50px auto 0;
+            .mat-card {
+                width: 100%;
+            }
+        }
+        .jobs .search-block .search-input {
+            max-width: inherit;
+        }
+    }
 
 }
 

@@ -19,10 +19,12 @@ const routes: Routes = [
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
     { path: 'about', component: AboutMeComponent },
+    { path: 'about/:id', component: AboutMeComponent },
     { path: 'jobs', component: JobsComponent },
     { path: 'about-company', component: AboutCompanyComponent },
     { path: 'practise', component: PractiseInterviewComponent },
     { path: 'profile', component: ProfileSecondComponent },
+    { path: 'profile/:id', component: ProfileSecondComponent },
     { path: 'videoMe', component: VideoMeComponent },
 
     // otherwise redirect to home

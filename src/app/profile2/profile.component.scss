@@ -209,4 +209,10 @@
         }
 
     }
+    @media (min-width: 992px) {
+        .profile-main {
+            width: 900px;
+            margin: 0 auto;
+        }
+    }
 }

@@ -95,28 +95,30 @@ export class AboutCompanyComponent implements OnInit {
     // })
   }
 
+  // tslint:disable-next-line:typedef
   uploadPhoto(list: FileList) {
-    console.log('list', list);
+    console.log('list', list.length);
     if (list.length === 0) {
         return;
     }
+    console.log('222');
     // 2 megabytes
-    if (list[0].size > 1024 * 1024 * 2) {
-        // this.growlService.logWarn('Файл не может быть больше 2 мб');
-        return;
-    }
-
-    let reader = new FileReader();
+    // if (list[0].size > 1024 * 1024 * 12) {
+    //     // this.growlService.logWarn('Файл не может быть больше 2 мб');
+    //     return;
+    // }
+    console.log('222');
+    const reader = new FileReader();
     reader.readAsDataURL(list[0]);
 
+    // tslint:disable-next-line:variable-name
     reader.onload = (_event) => {
       this.url = reader.result;
     };
 
-    // this.home.uploadPhoto(list[0]).subscribe((da) => {
-    //   console.log(da)
-    //
-    // });
+    this.homeService.uploadPhoto(list[0], this.accountService.userValue.id).subscribe((da) => {
+      console.log(da);
+    });
 
   }
 
